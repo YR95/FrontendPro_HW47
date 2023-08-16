@@ -1,6 +1,6 @@
 let idPost = 0;
 let dataPost;
-let dataPostComments = [];
+let dataPostComments=[] ;
 let buttonSubmmit = document.createElement("input");
 buttonSubmmit.type = "button";
 buttonSubmmit.id = "buttonSubmmit";
@@ -39,7 +39,7 @@ buttonSubmmit.addEventListener("click", (ev) => {
     return Promise.reject(response);
   })
   .then((json) => {
-    dataPostComments = JSON.stringify(json).replaceAll(",", ", <br>");
+    dataPostComments = json;
     console.log('comments are loaded');
     console.log(json);
     renderPostComments();
@@ -64,7 +64,13 @@ function renderPostComments() {
   let div = document.createElement("div");
   div.id = "comments";
   div.style.background = "yellow";
-  div.style.fontSize = "36px";
-  div.innerHTML += dataPostComments;
+
+  dataPostComments.forEach(function (value) {
+    let p = document.createElement("p");
+    p.innerText = JSON.stringify(value);
+    p.style.padding = "20px";
+    div.append(p);
+  });
+
   document.body.append(div);
 }

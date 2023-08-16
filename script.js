@@ -1,6 +1,6 @@
 let idPost = 0;
 let dataPost;
-let dataPostComments=[] ;
+let dataPostComments = [];
 let buttonSubmmit = document.createElement("input");
 buttonSubmmit.type = "button";
 buttonSubmmit.id = "buttonSubmmit";
@@ -18,9 +18,9 @@ document.querySelector("#inputId").addEventListener("change", (el) => {
     return Promise.reject(response); // 2. reject instead of throw
   })
   .then((json) => {//good scenario
-    dataPost = JSON.stringify(json).replaceAll(",", ", <br>");
+    dataPost = json;
     console.log('everything is ok');
-    console.log(json);
+    console.log(dataPost);
     renderPost();
   })
   .catch((response) => {         // bad scenario
@@ -41,7 +41,7 @@ buttonSubmmit.addEventListener("click", (ev) => {
   .then((json) => {
     dataPostComments = json;
     console.log('comments are loaded');
-    console.log(json);
+    console.log(dataPostComments);
     renderPostComments();
   })
   .catch((response) => {
@@ -55,7 +55,7 @@ function renderPost() {
   div.id = "postId";
   div.style.background = "aqua";
   div.style.fontSize = "36px";
-  div.innerHTML += dataPost;
+  div.innerHTML = JSON.stringify(dataPost);
   document.body.append(div, buttonSubmmit);
 }
 
